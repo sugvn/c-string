@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+// end of string should be decided through len and not '\0'
 typedef struct{
         char* val;
         size_t len;
@@ -25,7 +26,7 @@ Str STR(const char* s){
 
 // from l_index to r_index - 1
 Str STR_SLICE(Str s,size_t l_index,size_t r_index){
-        if (!(l_index < s.len && r_index <= s.len)) return (Str){0};
+        if (!(l_index < s.len && r_index <= s.len) || l_index > r_index) return (Str){0};
         Str str;
         str.val = s.val + l_index;
         str.len = r_index - l_index; 
